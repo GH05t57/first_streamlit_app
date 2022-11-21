@@ -54,17 +54,20 @@ except URLError as e:
   streamlit.error()
 
 #streamlit.stop()
-streamlit.header("The fruit load list contains:")
+#streamlit.header("The fruit load list contains:")
 #Snowflake-related functions
-def get_fruit_load_list():
-    with my_cnx.cursor() as my_cur:
-      my_cur.execute("SELECT * from fruit_load_list")
-    return my_cur.fetchall()
+#def get_fruit_load_list():
+#    with my_cnx.cursor() as my_cur:
+#      my_cur.execute("SELECT * from fruit_load_list")
+#    return my_cur.fetchall()
+
+my_data_row = my_cur.fetchall()
+streamlit.header("The fruit load list contains:")
+streamlit.dataframe(my_data_row)
 
 #add a button to load the fruit
 if streamlit.button('Get Fruit List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-    my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
     my_data_rows = get_fruit_load_list()
     my_cnx.close()
     streamlit.dataframe(my_data_rows)
@@ -72,7 +75,7 @@ if streamlit.button('Get Fruit List'):
 # Allow the end user to add a fruit to the list
 def insert_row_snowflake(new_fruit):
         with my_cnx.cursor() as my_cur:
-            my_cur.execute("insert into fruit_load_list values ('" + new_fruit   + "')")
+            my_cur.execute("insert into fruit_load_list values ('"  INSERT INTO fruit_load_list(  "')")
             my_cnx.close()
             return "Thanks for adding " + new_fruit
      
