@@ -69,3 +69,7 @@ def insert_row_snowflake(new_fruit):
             my_cnx.close()
             return "Thanks for adding " + new_fruit
        
+    
+    import requests
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
